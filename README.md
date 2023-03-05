@@ -8,7 +8,7 @@ Follow the instructions below to test the prototype.
 
 ## Test the Prototype
 
-We deployed a test intstance of the prototype. The dApp is accessible [here](https://web3-access.vercel.app/). The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x28817b1e266f43e4d89672a2c77bf5ac08fe6633437a10067524a513d06b99f3?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0x84a99f877e91f93b2396078f5f9b3449a1e97e6f0ff89158607aa5d809bb1fee?chain=testnet), [accessNFT](https://explorer.stacks.co/txid/0x413ae57460ebc38b672370163f32039e4ec90c57240356e7054ddabf88d745aa?chain=testnet), [ownershipNFT](https://explorer.stacks.co/txid/0xec1068f538fb3f7be825a07ad40a5ef378c1c962964eafc7691ecf676dab28fe?chain=testnet)).
+We deployed a test intstance of the prototype. The dApp is accessible [here](https://building-on-bitcoin-hackathon.vercel.app/). The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet), [accessNFT](https://explorer.stacks.co/txid/0x9c5895ab833542325131d8953167c032a8de3a0393cea0988dba563cf5a23d14?chain=testnet), [ownershipNFT](https://explorer.stacks.co/txid/0x8fd200f5911ba9da78d22f40c867805cd6024dd15d69a6e4b985ef6659d61d36?chain=testnet)).
 
 Follow this tutorial to store and access files:
 
@@ -17,7 +17,7 @@ Follow this tutorial to store and access files:
 1. Install [Hiro Wallet](https://wallet.hiro.so/) for the browser of your choice. Follow the set up process and carefully memorize your Seed and password if you plan to reuse your account at a later stage.
 2. Enter the menu (top right) in the Hiro wallet and "Change Network" to "testnet".
 3. Move to the [Testnet faucet](https://explorer.stacks.co/sandbox/faucet?chain=testnet) to receive some free STX so you can pay for transactions. You need to connect your wallet with the account you want to fund.
-4. Access the [dApp CHANGE HERE](https://web3-access.vercel.app/) and connect your account with the "Connect Wallet" button.
+4. Access the [dApp CHANGE HERE](https://building-on-bitcoin-hackathon.vercel.app/) and connect your account with the "Connect Wallet" button.
 
 | ![home.png](/readme-img/home.png)|
 |:--:|
@@ -56,7 +56,7 @@ Follow this tutorial to store and access files:
 
 ### Sharing Control
 
-- The buttons trigger the access logic in the respective smart contracts. The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x28817b1e266f43e4d89672a2c77bf5ac08fe6633437a10067524a513d06b99f3?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0x84a99f877e91f93b2396078f5f9b3449a1e97e6f0ff89158607aa5d809bb1fee?chain=testnet)).
+- The buttons trigger the access logic in the respective smart contracts. The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet)).
 - Role-Based sharing means to share files on an address-basis. Access-rights are non-transferable.
 - The owner account first needs to claim ownership by registering for the ownership role.
 - Then the owner can register other accounts to grant them access to the data.
