@@ -22,6 +22,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     } else if (userSession.isUserSignedIn()) {
       const tempUserSession = userSession.store.getSessionData()
 
+      // // @ts-ignore
+      // console.log(tempUserSession.userData.appPrivateKey)
+      // // @ts-ignore
+      // console.log(tempUserSession.userData.gaiaAssociationToken)
+      // // @ts-ignore
+      // console.log(tempUserSession.userData.gaiaHubConfig.address)
+
       // For Development Purposes only
       // Specific Wallet && localhost dev
       if (userSession.loadUserData().identityAddress === '17FpETPPW7ohN7aTabTv1SDQbkdAVmBMFC' && window.location.href.includes('localhost')) {
