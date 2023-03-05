@@ -163,8 +163,8 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
         <Box mr={2}>
           <Button
             width="140px"
+            color="black"
             backgroundColor={hasCopiedGaiaUrl ? 'green.400' : 'cyan.400'}
-            colorScheme={hasCopiedGaiaUrl ? 'green' : 'cyan'}
             leftIcon={hasCopiedGaiaUrl ? <Icon as={Check} /> : <Icon as={Copy} />}
             size="sm"
             onClick={onCopyGaiaUrl}
@@ -175,7 +175,7 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
 
         {/* Delete Button and Modal */}
         <Box>
-          <Button leftIcon={<Icon as={Trash2} />} colorScheme="red" bg="red.400" size="sm" onClick={onDeleteAlertDialogOpen}>
+          <Button leftIcon={<Icon as={Trash2} />} color="black" bg="red.400" size="sm" onClick={onDeleteAlertDialogOpen}>
             Delete
           </Button>
           <AlertDialog isOpen={isDeleteAlertDialogOpen} onClose={onDeleteAlertDialogClose} leastDestructiveRef={deleteDialogCancelRef}>
@@ -187,7 +187,7 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
                   <Button onClick={onDeleteAlertDialogClose} ref={deleteDialogCancelRef}>
                     Cancel
                   </Button>
-                  <Button ml={2} colorScheme="red" bg="red.400" onClick={async () => await handleDeleteFile(path)} isLoading={isLoading}>
+                  <Button ml={2} color="black" bg="red.400" onClick={async () => await handleDeleteFile(path)} isLoading={isLoading}>
                     Delete
                   </Button>
                 </AlertDialogFooter>
@@ -203,7 +203,7 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
           <></>
         ) : (
           <Box mr={2}>
-            <Button width="140px" leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={onShareAlertDialogOpen}>
+            <Button width="140px" leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={onShareAlertDialogOpen}>
               {accessControl === 'private' ? 'Allow Sharing' : 'Revoke Sharing'}
             </Button>
             <AlertDialog isOpen={isShareAlertDialogOpen} onClose={onShareAlertDialogClose} leastDestructiveRef={shareDialogCancelRef}>
@@ -215,7 +215,7 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
                     <Button onClick={onShareAlertDialogClose} ref={shareDialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button ml={2} colorScheme="blue" bg="blue.400" onClick={async () => await handleShareFile(path)} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await handleShareFile(path)} isLoading={isLoading}>
                       {accessControl === 'private' ? 'Allow Sharing' : 'Revoke Sharing'}
                     </Button>
                   </AlertDialogFooter>
@@ -228,7 +228,7 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
         {accessControl === 'shared' ? (
           <Box>
             <a href={`/sharingcontrol/${path}`}>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.100" size="sm">
+              <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.100" size="sm">
                 Sharing Control
               </Button>
             </a>

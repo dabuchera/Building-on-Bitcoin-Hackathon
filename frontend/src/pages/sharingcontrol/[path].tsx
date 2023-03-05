@@ -36,16 +36,16 @@ import { IPrivateFile, IPublicFile } from '@/types/storage'
 import { appDetails } from '@/lib/constants'
 import { ContractCallRegularOptions, openContractCall } from '@stacks/connect'
 import { url } from 'inspector'
-import { 
-  callReadOnlyFunction, 
-  stringAsciiCV, 
-  uintCV, 
-  cvToValue, 
+import {
+  callReadOnlyFunction,
+  stringAsciiCV,
+  uintCV,
+  cvToValue,
   standardPrincipalCV,
   NonFungibleConditionCode,
   createAssetInfo,
   makeStandardNonFungiblePostCondition,
-  PostConditionMode
+  PostConditionMode,
 } from '@stacks/transactions'
 import { StacksNetwork, StacksTestnet, StacksMocknet } from '@stacks/network'
 import { useAuth } from '@/hooks/use-auth'
@@ -55,7 +55,7 @@ const ObjectPage: NextPage = () => {
     query: { path },
   } = useRouter()
   const { getFile, getFileMetadata, listDataAccessors, listAccessNFT } = useStorage()
-  const {useSTXAddress} =  useAuth()
+  const { useSTXAddress } = useAuth()
 
   const toast = useToast()
 
@@ -116,7 +116,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'rolesAccess',
       functionName: 'add-data-owner',
       functionArgs: [stringAsciiCV(metadata.url)],
@@ -141,7 +141,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'rolesAccess',
       functionName: 'add-data-accessor',
       functionArgs: [stringAsciiCV(metadata.url), standardPrincipalCV(addressInput1)],
@@ -166,7 +166,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'rolesAccess',
       functionName: 'remove-data-accessors',
       functionArgs: [stringAsciiCV(metadata.url)],
@@ -187,7 +187,7 @@ const ObjectPage: NextPage = () => {
   // (get-data-owner (url (string-ascii 100)))
   const getDataOwner = async () => {
     const address = useSTXAddress()
-    if(!address){
+    if (!address) {
       return null
     }
     const url = metadata?.url
@@ -195,15 +195,15 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const operationalTemp = await callReadOnlyFunction({
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'rolesAccess',
       functionName: 'get-data-owner',
       functionArgs: [stringAsciiCV(metadata.url)],
       senderAddress: address,
-      network
+      network,
     })
     console.log(cvToValue(operationalTemp).value)
-    if (cvToValue(operationalTemp).value == "1005"){
+    if (cvToValue(operationalTemp).value == '1005') {
       toast({
         title: 'Transaction failed',
         description: 'No data owner found.',
@@ -219,22 +219,21 @@ const ObjectPage: NextPage = () => {
     return null
   }
 
-   // (list-of-data-accessors (url (string-ascii 100)))
-   const listOfDataAccessors = async () => {
+  // (list-of-data-accessors (url (string-ascii 100)))
+  const listOfDataAccessors = async () => {
     const url = metadata?.url
     if (!url) {
       return null
     }
     const show = await listDataAccessors(url)
-    if (show.length === 0){
+    if (show.length === 0) {
       toast({
         title: 'No entries',
         description: 'There are no entries for this file',
         status: 'error',
       })
       return null
-    }
-    else {
+    } else {
       toast({
         title: 'Transaction succeeded',
         description: show.join('\n'),
@@ -253,7 +252,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'tokenAccess',
       functionName: 'mint-ownership-nft',
       functionArgs: [stringAsciiCV(metadata.url)],
@@ -278,7 +277,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'tokenAccess',
       functionName: 'mint-data-access-nft',
       functionArgs: [stringAsciiCV(metadata.url)],
@@ -299,7 +298,7 @@ const ObjectPage: NextPage = () => {
   // (transfer (token-id uint) (sender principal) (recipient principal))
   const transferAccessNFT = async () => {
     const address = useSTXAddress()
-    if(!address){
+    if (!address) {
       return null
     }
     const url = metadata?.url
@@ -309,21 +308,20 @@ const ObjectPage: NextPage = () => {
     // With a standard principal
     const postConditionAddress = address
     const postConditionCode = NonFungibleConditionCode.DoesNotOwn
-    const assetAddress = (process.env.REACT_APP_CONTRACT_ADDRESS as string)
+    const assetAddress = process.env.REACT_APP_CONTRACT_ADDRESS as string
     const assetContractName = 'accessNFT'
     const assetName = 'accessNFT'
     // const tokenAssetName = stringAsciiCV('accessNFT')
     const tokenAssetName = uintCV(numberInput1)
     const nonFungibleAssetInfo = createAssetInfo(assetAddress, assetContractName, assetName)
-    const standardNonFungiblePostCondition = 
-      makeStandardNonFungiblePostCondition(
-        postConditionAddress,
-        postConditionCode,
-        nonFungibleAssetInfo,
-        tokenAssetName
-      )
+    const standardNonFungiblePostCondition = makeStandardNonFungiblePostCondition(
+      postConditionAddress,
+      postConditionCode,
+      nonFungibleAssetInfo,
+      tokenAssetName
+    )
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'accessNFT',
       functionName: 'transfer',
       functionArgs: [uintCV(numberInput1), standardPrincipalCV(address), standardPrincipalCV(addressInput2)],
@@ -349,7 +347,7 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const options: ContractCallRegularOptions = {
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'tokenAccess',
       functionName: 'change-access-nft-activation',
       functionArgs: [stringAsciiCV(metadata.url)],
@@ -370,7 +368,7 @@ const ObjectPage: NextPage = () => {
   // (get-ownership-nft-owner (url (string-ascii 100)))
   const getOwnershipNFTOwner = async () => {
     const address = useSTXAddress()
-    if(!address){
+    if (!address) {
       return null
     }
     const url = metadata?.url
@@ -378,15 +376,15 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const operationalTemp = await callReadOnlyFunction({
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'tokenAccess',
       functionName: 'get-ownership-nft-owner',
       functionArgs: [stringAsciiCV(metadata.url)],
       senderAddress: address,
-      network
+      network,
     })
     console.log(cvToValue(operationalTemp).value)
-    if (cvToValue(operationalTemp).value == "1005"){
+    if (cvToValue(operationalTemp).value == '1005') {
       toast({
         title: 'Transaction failed',
         description: 'No NFT owner found.',
@@ -409,15 +407,14 @@ const ObjectPage: NextPage = () => {
       return null
     }
     const show = await listAccessNFT(url)
-    if (show.length === 0){
+    if (show.length === 0) {
       toast({
         title: 'No entries',
         description: 'There are no entries for this file',
         status: 'error',
       })
       return null
-    }
-    else{
+    } else {
       toast({
         title: 'Transaction succeeded',
         description: show.join(' : '),
@@ -430,19 +427,19 @@ const ObjectPage: NextPage = () => {
   // (get-access-nft-owner (uri uint))
   const getAccessNFTOwner = async () => {
     const address = useSTXAddress()
-    if(!address){
+    if (!address) {
       return null
     }
     const operationalTemp = await callReadOnlyFunction({
-      contractAddress: (process.env.REACT_APP_CONTRACT_ADDRESS as string),
+      contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS as string,
       contractName: 'tokenAccess',
       functionName: 'get-access-nft-owner',
       functionArgs: [uintCV(numberInput2)],
       senderAddress: address,
-      network
+      network,
     })
     console.log(cvToValue(operationalTemp).value)
-    if (cvToValue(operationalTemp).value == "1003"){
+    if (cvToValue(operationalTemp).value == '1003') {
       toast({
         title: 'Transaction failed',
         description: 'No address found for this URI.',
@@ -472,26 +469,19 @@ const ObjectPage: NextPage = () => {
             Register for Ownership-Role
           </Text>
           <Flex mb={8}>
-            <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_1DialogOpen}>
+            <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_1DialogOpen}>
               add-data-owner
             </Button>
             <AlertDialog isOpen={is_1DialogOpen} onClose={on_1DialogClose} leastDestructiveRef={_1DialogCancelRef}>
               <AlertDialogOverlay>
                 <AlertDialogContent>
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to execute this transaction? This will cost a transaction fee.
-                  </AlertDialogBody>
+                  <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
                     <Button onClick={on_1DialogClose} ref={_1DialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      onClick={async () => await addDataOwner()}
-                      isLoading={isLoading}
-                    >
+                    <Button color="black" bg="blue.400" onClick={async () => await addDataOwner()} isLoading={isLoading}>
                       Register as Owner
                     </Button>
                   </AlertDialogFooter>
@@ -505,29 +495,30 @@ const ObjectPage: NextPage = () => {
             Register Address for Access-Role (max. 10)
           </Text>
           <Flex mb={8}>
-          <Flex>
-          <Input mr={2} borderColor="black" _hover={{ borderColor: 'white' }} _placeholder={{color: 'black'}} placeholder='Copy Stacks-Address here' value={addressInput1} onChange={(event) => setAddressInput1(event.target.value)}/>
-          </Flex>
-            <Button mt={1} leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_2DialogOpen}>
+            <Flex>
+              <Input
+                mr={2}
+                borderColor="black"
+                _hover={{ borderColor: 'white' }}
+                _placeholder={{ color: 'black' }}
+                placeholder="Copy Stacks-Address here"
+                value={addressInput1}
+                onChange={(event) => setAddressInput1(event.target.value)}
+              />
+            </Flex>
+            <Button mt={1} leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_2DialogOpen}>
               add-data-accessor
             </Button>
             <AlertDialog isOpen={is_2DialogOpen} onClose={on_2DialogClose} leastDestructiveRef={_2DialogCancelRef}>
               <AlertDialogOverlay>
                 <AlertDialogContent>
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to execute this transaction? This will cost a transaction fee.
-                  </AlertDialogBody>
+                  <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
                     <Button onClick={on_2DialogClose} ref={_2DialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      onClick={async () => await addDataAccessor()}
-                      isLoading={isLoading}
-                    >
+                    <Button color="black" bg="blue.400" onClick={async () => await addDataAccessor()} isLoading={isLoading}>
                       Register Address
                     </Button>
                   </AlertDialogFooter>
@@ -542,26 +533,19 @@ const ObjectPage: NextPage = () => {
           </Text>
           <Flex mb={8}>
             <Box>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_3DialogOpen}>
+              <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_3DialogOpen}>
                 remove-data-accessors
               </Button>
               <AlertDialog isOpen={is_3DialogOpen} onClose={on_3DialogClose} leastDestructiveRef={_3DialogCancelRef}>
                 <AlertDialogOverlay>
                   <AlertDialogContent>
                     <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                    <AlertDialogBody>
-                      Are you sure you want to execute this transaction? This will cost a transaction fee.
-                    </AlertDialogBody>
+                    <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                     <AlertDialogFooter as={Flex}>
                       <Button onClick={on_3DialogClose} ref={_3DialogCancelRef}>
                         Cancel
                       </Button>
-                      <Button
-                        colorScheme="blue"
-                        bg="blue.400"
-                        onClick={async () => await removeDataAccessors()}
-                        isLoading={isLoading}
-                      >
+                      <Button color="black" bg="blue.400" onClick={async () => await removeDataAccessors()} isLoading={isLoading}>
                         Remove
                       </Button>
                     </AlertDialogFooter>
@@ -577,20 +561,24 @@ const ObjectPage: NextPage = () => {
 
           {/* Get address that has ownership role */}
           <Flex mb={2}>
-          <Text mr={2} pt={1} fontSize="l">Get address with the Ownership-Role.</Text>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={getDataOwner}>
-                get-data-owner
-              </Button>
+            <Text mr={2} pt={1} fontSize="l">
+              Get address with the Ownership-Role.
+            </Text>
+            <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={getDataOwner}>
+              get-data-owner
+            </Button>
           </Flex>
 
           {/* Get list of addresses that have access role */}
           <Flex mb={8}>
-          <Text mr={2} pt={1} fontSize="l">Retrieve all addresses that have the Access-Role.</Text>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={listOfDataAccessors}>
-                list-of-data-accessors
-              </Button>
+            <Text mr={2} pt={1} fontSize="l">
+              Retrieve all addresses that have the Access-Role.
+            </Text>
+            <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={listOfDataAccessors}>
+              list-of-data-accessors
+            </Button>
           </Flex>
-          
+
           {/* --------------  TOKEN FUNCTIONS -------------- */}
           <Heading mb={5}>Token-Based Data Sharing</Heading>
 
@@ -599,26 +587,19 @@ const ObjectPage: NextPage = () => {
             Mint Ownership-NFT
           </Text>
           <Flex mb={8}>
-            <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_4DialogOpen}>
+            <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_4DialogOpen}>
               mint-ownership-nft
             </Button>
             <AlertDialog isOpen={is_4DialogOpen} onClose={on_4DialogClose} leastDestructiveRef={_4DialogCancelRef}>
               <AlertDialogOverlay>
                 <AlertDialogContent>
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to execute this transaction? This will cost a transaction fee.
-                  </AlertDialogBody>
+                  <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
                     <Button onClick={on_4DialogClose} ref={_4DialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      onClick={async () => await mintOwnershipNFT()}
-                      isLoading={isLoading}
-                    >
+                    <Button color="black" bg="blue.400" onClick={async () => await mintOwnershipNFT()} isLoading={isLoading}>
                       Mint
                     </Button>
                   </AlertDialogFooter>
@@ -632,26 +613,19 @@ const ObjectPage: NextPage = () => {
             Mint Access-NFTs (max. 10)
           </Text>
           <Flex mb={8}>
-            <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_5DialogOpen}>
+            <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_5DialogOpen}>
               mint-data-access-nft
             </Button>
             <AlertDialog isOpen={is_5DialogOpen} onClose={on_5DialogClose} leastDestructiveRef={_5DialogCancelRef}>
               <AlertDialogOverlay>
                 <AlertDialogContent>
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to execute this transaction? This will cost a transaction fee.
-                  </AlertDialogBody>
+                  <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
                     <Button onClick={on_5DialogClose} ref={_5DialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      onClick={async () => await mintDataAccessNFT()}
-                      isLoading={isLoading}
-                    >
+                    <Button color="black" bg="blue.400" onClick={async () => await mintDataAccessNFT()} isLoading={isLoading}>
                       Mint
                     </Button>
                   </AlertDialogFooter>
@@ -666,37 +640,47 @@ const ObjectPage: NextPage = () => {
           </Text>
           <Flex mb={8}>
             <Box mr={2}>
-            <NumberInput size="md" borderColor="black" _hover={{ borderColor: 'white' }} defaultValue={1} min={1} value={String(numberInput1)} onChange={(value) => setNumberInput1(Number(value))}>
-              <NumberInputField />
-              <NumberInputStepper  >
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
+              <NumberInput
+                size="md"
+                borderColor="black"
+                _hover={{ borderColor: 'white' }}
+                defaultValue={1}
+                min={1}
+                value={String(numberInput1)}
+                onChange={(value) => setNumberInput1(Number(value))}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
             </Box>
-            <Input mb={2} mr={2} borderColor="black" _hover={{ borderColor: 'white' }} _placeholder={{color: 'black'}} placeholder='Copy Stacks-Address here' value={addressInput2} onChange={(event) => setAddressInput2(event.target.value)}/>
+            <Input
+              mb={2}
+              mr={2}
+              borderColor="black"
+              _hover={{ borderColor: 'white' }}
+              _placeholder={{ color: 'black' }}
+              placeholder="Copy Stacks-Address here"
+              value={addressInput2}
+              onChange={(event) => setAddressInput2(event.target.value)}
+            />
             <Box>
-            <Button marginTop={1} leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_6DialogOpen}>
-              transfer
-            </Button>
+              <Button marginTop={1} leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_6DialogOpen}>
+                transfer
+              </Button>
             </Box>
             <AlertDialog isOpen={is_6DialogOpen} onClose={on_5DialogClose} leastDestructiveRef={_6DialogCancelRef}>
               <AlertDialogOverlay>
                 <AlertDialogContent>
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                  <AlertDialogBody>
-                    Are you sure you want to execute this transaction? This will cost a transaction fee.
-                  </AlertDialogBody>
+                  <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
                     <Button onClick={on_6DialogClose} ref={_6DialogCancelRef}>
                       Cancel
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      bg="blue.400"
-                      onClick={async () => await transferAccessNFT()}
-                      isLoading={isLoading}
-                    >
+                    <Button color="black" bg="blue.400" onClick={async () => await transferAccessNFT()} isLoading={isLoading}>
                       Transfer
                     </Button>
                   </AlertDialogFooter>
@@ -711,26 +695,19 @@ const ObjectPage: NextPage = () => {
           </Text>
           <Flex mb={8}>
             <Box>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={on_7DialogOpen}>
+              <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={on_7DialogOpen}>
                 change-access-nft-activation
               </Button>
               <AlertDialog isOpen={is_7DialogOpen} onClose={on_7DialogClose} leastDestructiveRef={_7DialogCancelRef}>
                 <AlertDialogOverlay>
                   <AlertDialogContent>
                     <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
-                    <AlertDialogBody>
-                      Are you sure you want to execute this transaction? This will cost a transaction fee.
-                    </AlertDialogBody>
+                    <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                     <AlertDialogFooter as={Flex}>
                       <Button onClick={on_7DialogClose} ref={_7DialogCancelRef}>
                         Cancel
                       </Button>
-                      <Button
-                        colorScheme="blue"
-                        bg="blue.400"
-                        onClick={async () => await changeAcessNFTActivation()}
-                        isLoading={isLoading}
-                      >
+                      <Button color="black" bg="blue.400" onClick={async () => await changeAcessNFTActivation()} isLoading={isLoading}>
                         Change
                       </Button>
                     </AlertDialogFooter>
@@ -746,11 +723,13 @@ const ObjectPage: NextPage = () => {
 
           {/* Get owner of ownerNFT */}
           <Flex mb={2}>
-          <Box>
-              <Text mr={2} pt={1} fontSize="l">Get the owner of the Ownership-NFT.</Text>
+            <Box>
+              <Text mr={2} pt={1} fontSize="l">
+                Get the owner of the Ownership-NFT.
+              </Text>
             </Box>
             <Box>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={getOwnershipNFTOwner}>
+              <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={getOwnershipNFTOwner}>
                 get-ownerhsip-nft-owner
               </Button>
             </Box>
@@ -758,27 +737,39 @@ const ObjectPage: NextPage = () => {
 
           {/* Get List of accessNFT Owners */}
           <Flex mb={2}>
-          <Box>
-              <Text mr={2} pt={1} fontSize="l">Retrieve all active Access-NFT URI's.</Text>
+            <Box>
+              <Text mr={2} pt={1} fontSize="l">
+                Retrieve all active Access-NFT URI's.
+              </Text>
             </Box>
             <Box>
-              <Button leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={listOfAccessNFT}>
+              <Button leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={listOfAccessNFT}>
                 list-of-access-nft
               </Button>
             </Box>
           </Flex>
 
           {/* Get Access NFT Owner */}
-          <Text fontSize="l" mb={2} mt={2}>Get the owner of one of the Access-NFT URI's retrieved above.</Text>
+          <Text fontSize="l" mb={2} mt={2}>
+            Get the owner of one of the Access-NFT URI's retrieved above.
+          </Text>
           <Flex>
-            <NumberInput mr={2} borderColor="black" _hover={{ borderColor: 'white' }}  defaultValue={1} min={1} value={String(numberInput2)} onChange={(value) => setNumberInput2(Number(value))}>
+            <NumberInput
+              mr={2}
+              borderColor="black"
+              _hover={{ borderColor: 'white' }}
+              defaultValue={1}
+              min={1}
+              value={String(numberInput2)}
+              onChange={(value) => setNumberInput2(Number(value))}
+            >
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
               </NumberInputStepper>
             </NumberInput>
-            <Button mt={1} leftIcon={<Icon as={Share2} />} colorScheme="blue" bg="blue.400" size="sm" onClick={getAccessNFTOwner}>
+            <Button mt={1} leftIcon={<Icon as={Share2} />} color="black" bg="blue.400" size="sm" onClick={getAccessNFTOwner}>
               get-access-nft-owner
             </Button>
           </Flex>

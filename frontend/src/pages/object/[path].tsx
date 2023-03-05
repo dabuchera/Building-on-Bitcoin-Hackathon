@@ -173,7 +173,8 @@ const ObjectPage: NextPage = () => {
                     borderColor="black"
                     color="black"
                     _hover={{ bg: 'black', color: 'white' }}
-                    colorScheme={hasCopiedText ? 'green' : 'gray'}
+                    bgColor={hasCopiedText ? 'green' : 'gray'}
+                    // colorScheme={hasCopiedText ? 'green' : 'gray'}
                   />
                 </VStack>
               ) : (

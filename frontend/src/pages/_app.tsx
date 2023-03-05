@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       // For Development Purposes only
       // Specific Wallet && localhost dev
-      if (userSession.loadUserData().identityAddress === '17FpETPPW7ohN7aTabTv1SDQbkdAVmBMFC' && window.location.href.includes('localhost')) {
+      if (userSession.loadUserData().identityAddress === '1Fs4P2vr8K6xhbP2DN95CNLZeE23qLEehd' && window.location.href.includes('localhost')) {
         console.log('For Development Purposes only')
         // @ts-ignore
         // tempUserSession.userData.appPrivateKey = process.env.DEV_APP_PRIVATE_KEY
