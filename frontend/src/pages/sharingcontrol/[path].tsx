@@ -474,14 +474,21 @@ const ObjectPage: NextPage = () => {
             </Button>
             <AlertDialog isOpen={is_1DialogOpen} onClose={on_1DialogClose} leastDestructiveRef={_1DialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={on_1DialogClose} ref={_1DialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={on_1DialogClose}
+                      ref={_1DialogCancelRef}
+                    >
                       Cancel
                     </Button>
-                    <Button color="black" bg="blue.400" onClick={async () => await addDataOwner()} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await addDataOwner()} isLoading={isLoading}>
                       Register as Owner
                     </Button>
                   </AlertDialogFooter>
@@ -511,14 +518,21 @@ const ObjectPage: NextPage = () => {
             </Button>
             <AlertDialog isOpen={is_2DialogOpen} onClose={on_2DialogClose} leastDestructiveRef={_2DialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={on_2DialogClose} ref={_2DialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={on_2DialogClose}
+                      ref={_2DialogCancelRef}
+                    >
                       Cancel
                     </Button>
-                    <Button color="black" bg="blue.400" onClick={async () => await addDataAccessor()} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await addDataAccessor()} isLoading={isLoading}>
                       Register Address
                     </Button>
                   </AlertDialogFooter>
@@ -538,14 +552,21 @@ const ObjectPage: NextPage = () => {
               </Button>
               <AlertDialog isOpen={is_3DialogOpen} onClose={on_3DialogClose} leastDestructiveRef={_3DialogCancelRef}>
                 <AlertDialogOverlay>
-                  <AlertDialogContent>
+                  <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                     <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                     <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                     <AlertDialogFooter as={Flex}>
-                      <Button onClick={on_3DialogClose} ref={_3DialogCancelRef}>
+                      <Button
+                        border="1px"
+                        borderColor="black"
+                        color="black"
+                        _hover={{ bg: 'black', color: 'white' }}
+                        onClick={on_3DialogClose}
+                        ref={_3DialogCancelRef}
+                      >
                         Cancel
                       </Button>
-                      <Button color="black" bg="blue.400" onClick={async () => await removeDataAccessors()} isLoading={isLoading}>
+                      <Button ml={2} color="black" bg="blue.400" onClick={async () => await removeDataAccessors()} isLoading={isLoading}>
                         Remove
                       </Button>
                     </AlertDialogFooter>
@@ -592,14 +613,21 @@ const ObjectPage: NextPage = () => {
             </Button>
             <AlertDialog isOpen={is_4DialogOpen} onClose={on_4DialogClose} leastDestructiveRef={_4DialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={on_4DialogClose} ref={_4DialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={on_4DialogClose}
+                      ref={_4DialogCancelRef}
+                    >
                       Cancel
                     </Button>
-                    <Button color="black" bg="blue.400" onClick={async () => await mintOwnershipNFT()} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await mintOwnershipNFT()} isLoading={isLoading}>
                       Mint
                     </Button>
                   </AlertDialogFooter>
@@ -618,14 +646,21 @@ const ObjectPage: NextPage = () => {
             </Button>
             <AlertDialog isOpen={is_5DialogOpen} onClose={on_5DialogClose} leastDestructiveRef={_5DialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={on_5DialogClose} ref={_5DialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={on_5DialogClose}
+                      ref={_5DialogCancelRef}
+                    >
                       Cancel
                     </Button>
-                    <Button color="black" bg="blue.400" onClick={async () => await mintDataAccessNFT()} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await mintDataAccessNFT()} isLoading={isLoading}>
                       Mint
                     </Button>
                   </AlertDialogFooter>
@@ -673,14 +708,21 @@ const ObjectPage: NextPage = () => {
             </Box>
             <AlertDialog isOpen={is_6DialogOpen} onClose={on_5DialogClose} leastDestructiveRef={_6DialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={on_6DialogClose} ref={_6DialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={on_6DialogClose}
+                      ref={_6DialogCancelRef}
+                    >
                       Cancel
                     </Button>
-                    <Button color="black" bg="blue.400" onClick={async () => await transferAccessNFT()} isLoading={isLoading}>
+                    <Button ml={2} color="black" bg="blue.400" onClick={async () => await transferAccessNFT()} isLoading={isLoading}>
                       Transfer
                     </Button>
                   </AlertDialogFooter>
@@ -700,14 +742,21 @@ const ObjectPage: NextPage = () => {
               </Button>
               <AlertDialog isOpen={is_7DialogOpen} onClose={on_7DialogClose} leastDestructiveRef={_7DialogCancelRef}>
                 <AlertDialogOverlay>
-                  <AlertDialogContent>
+                  <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                     <AlertDialogHeader>Transaction Execution</AlertDialogHeader>
                     <AlertDialogBody>Are you sure you want to execute this transaction? This will cost a transaction fee.</AlertDialogBody>
                     <AlertDialogFooter as={Flex}>
-                      <Button onClick={on_7DialogClose} ref={_7DialogCancelRef}>
+                      <Button
+                        border="1px"
+                        borderColor="black"
+                        color="black"
+                        _hover={{ bg: 'black', color: 'white' }}
+                        onClick={on_7DialogClose}
+                        ref={_7DialogCancelRef}
+                      >
                         Cancel
                       </Button>
-                      <Button color="black" bg="blue.400" onClick={async () => await changeAcessNFTActivation()} isLoading={isLoading}>
+                      <Button ml={2} color="black" bg="blue.400" onClick={async () => await changeAcessNFTActivation()} isLoading={isLoading}>
                         Change
                       </Button>
                     </AlertDialogFooter>

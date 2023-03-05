@@ -180,11 +180,18 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
           </Button>
           <AlertDialog isOpen={isDeleteAlertDialogOpen} onClose={onDeleteAlertDialogClose} leastDestructiveRef={deleteDialogCancelRef}>
             <AlertDialogOverlay>
-              <AlertDialogContent>
+              <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                 <AlertDialogHeader>Delete File</AlertDialogHeader>
                 <AlertDialogBody>Are you sure you want to delete this file? This operation cannot be undone.</AlertDialogBody>
                 <AlertDialogFooter as={Flex}>
-                  <Button onClick={onDeleteAlertDialogClose} ref={deleteDialogCancelRef}>
+                  <Button
+                    border="1px"
+                    borderColor="black"
+                    color="black"
+                    _hover={{ bg: 'black', color: 'white' }}
+                    onClick={onDeleteAlertDialogClose}
+                    ref={deleteDialogCancelRef}
+                  >
                     Cancel
                   </Button>
                   <Button ml={2} color="black" bg="red.400" onClick={async () => await handleDeleteFile(path)} isLoading={isLoading}>
@@ -208,11 +215,18 @@ const File = ({ path, accessControl, encrypted, isString, lastModified, url }: I
             </Button>
             <AlertDialog isOpen={isShareAlertDialogOpen} onClose={onShareAlertDialogClose} leastDestructiveRef={shareDialogCancelRef}>
               <AlertDialogOverlay>
-                <AlertDialogContent>
+                <AlertDialogContent bgColor={'#d6d6d6'} color="black">
                   <AlertDialogHeader>Share File</AlertDialogHeader>
                   <AlertDialogBody>Are you sure you want to share this file?</AlertDialogBody>
                   <AlertDialogFooter as={Flex}>
-                    <Button onClick={onShareAlertDialogClose} ref={shareDialogCancelRef}>
+                    <Button
+                      border="1px"
+                      borderColor="black"
+                      color="black"
+                      _hover={{ bg: 'black', color: 'white' }}
+                      onClick={onShareAlertDialogClose}
+                      ref={shareDialogCancelRef}
+                    >
                       Cancel
                     </Button>
                     <Button ml={2} color="black" bg="blue.400" onClick={async () => await handleShareFile(path)} isLoading={isLoading}>
