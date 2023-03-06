@@ -66,7 +66,7 @@ export const useAuth = () => {
 
   const getAccessNFTBalance = async (address: string) => {
     const client = getRPCClient()
-    const url = `${client.url}/extended/v1/tokens/nft/holdings?principal=${address}&asset_identifiers=STN5A1RKHA2C2WH033G82SR2MSR8BGY3W1XTJ5W5.accessNFT::accessNFT`
+    const url = `${client.url}/extended/v1/tokens/nft/holdings?principal=${address}&asset_identifiers=${process.env.REACT_APP_CONTRACT_ADDRESS}.accessNFT::accessNFT`
 
     // console.log(url)
     const response = await fetch(url, { credentials: 'omit' })
