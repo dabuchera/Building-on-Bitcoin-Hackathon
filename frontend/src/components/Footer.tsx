@@ -5,7 +5,7 @@ const Footer = () => (
   <VStack as="footer" alignItems="center" justify="center" spacing={4} mt={10}>
     <Text>
       The code and further documentation is available on GitHub,{' '}
-      <Link href="https://github.com/dabuchera/web3-access" isExternal>
+      <Link href="https://github.com/dabuchera/Building-on-Bitcoin-Hackathon" isExternal>
         dabuchera
       </Link>
     </Text>
