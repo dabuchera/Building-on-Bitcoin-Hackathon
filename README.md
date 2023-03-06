@@ -62,7 +62,7 @@ Follow this tutorial to store and access files:
 
 
 #### Role-Based Sharing
-- **Role-Based sharing** means to share files on an address-basis. **Access-rights are non-transferable**.
+- Role-Based sharing means to share files on an address-basis. **Access-rights are non-transferable**.
 - The owner account first needs to claim ownership by registering for the ownership role.
 - Then the owner can register other accounts to grant them access to the data.
 
@@ -72,7 +72,7 @@ Follow this tutorial to store and access files:
 
 
 #### Token-Based Sharing
-- **Token-based** sharing means to share files on a token basis. Every holder of an access-NFT can access the data. **This means access-rights are transferable**.
+- Token-based sharing means to share files on a token basis. Every holder of an access-NFT can access the data. **This means access-rights are transferable**.
 - The owner first claims the ownership-NFT.
 - Afterwards, the owner holding the ownership-NFT can claim access-NFTs to send to other accounts to grant access.
 
