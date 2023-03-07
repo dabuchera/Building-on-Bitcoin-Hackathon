@@ -4,8 +4,6 @@
 ;;
 ;; A token-based access contract for data stored with Gaia.
 ;;
-;; This contract is developed for the EC3 2023 conference paper on Web3
-;; access control in the built environment.
 ;;
 
 ;; ------------------------------
