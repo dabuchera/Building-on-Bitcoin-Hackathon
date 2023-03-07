@@ -2,15 +2,15 @@
 
 This prototype is the submission for the [Building on Bitcoin Hackathon](https://building-on-btc-hack.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open) by [dabuchera](https://github.com/dabuchera) and [hujens](https://github.com/hujens). It is part of our ongoing research with some additions (see also [here](https://github.com/dabuchera/web3-access)).
 
-The prototype demonstrates how to use role-based and token-based smart contract access control for files and text snippets. The data is stored off-chain using a data storage protocol called [Gaia](https://github.com/stacks-network/gaia).
+The prototype demonstrates how to use role-based and token-based smart contract access control for files and text snippets. This is exciting because access-logic to data can be decentralized with the dApp and Smart Contracts, instead of relying on access logic managed by a central server. The data is stored off-chain using a data storage protocol called [Gaia](https://github.com/stacks-network/gaia).
 
 Follow the instructions below to test the prototype. 
 
-**Most important**: Please be a bit patient. It takes time until transactions are confirmed and changes to the access logic are reflected in the prototype. You can always check the state of the transaction in the Stacks Explorer, e.g. for the [RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet) or [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet) contract.
+**Important**: Please be patient. It takes time until transactions are confirmed and changes to the access logic are reflected in the prototype. You can always check the state of the transaction in the Stacks Explorer, e.g. for the [RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet) or [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet) contract.
 
 ## Test the Prototype
 
-We deployed a test intstance of the prototype. The dApp is accessible [here](https://building-on-bitcoin-hackathon.vercel.app/). The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet), [accessNFT](https://explorer.stacks.co/txid/0x9c5895ab833542325131d8953167c032a8de3a0393cea0988dba563cf5a23d14?chain=testnet), [ownershipNFT](https://explorer.stacks.co/txid/0x8fd200f5911ba9da78d22f40c867805cd6024dd15d69a6e4b985ef6659d61d36?chain=testnet)).
+We deployed a test instance of the prototype. The dApp is accessible [here](https://building-on-bitcoin-hackathon.vercel.app/). The smart contracts are deployed on the Stacks testnet ([RolesAccess](https://explorer.stacks.co/txid/0x90d3f74e779db902ad530e234d25cdd7c5f199ae1ae6f6bbdceeb0b31cec80f8?chain=testnet), [TokenAccess](https://explorer.stacks.co/txid/0xfad00174f87245fda375a12016b1a6a361e02eca174870973e978cb809e14a3e?chain=testnet), [accessNFT](https://explorer.stacks.co/txid/0x9c5895ab833542325131d8953167c032a8de3a0393cea0988dba563cf5a23d14?chain=testnet), [ownershipNFT](https://explorer.stacks.co/txid/0x8fd200f5911ba9da78d22f40c867805cd6024dd15d69a6e4b985ef6659d61d36?chain=testnet)).
 
 Follow this tutorial to store and access files:
 
@@ -106,13 +106,24 @@ Follow this tutorial to store and access files:
 
 ## Local Development
 
-### Deploy Contracts
-
 We use [Stacks](https://www.stacks.co/) for this protoype with smart contracts written in [Clarity](https://book.clarity-lang.org/).
 
-To run and test the smart contracts locally, you can deploy them to a local network.
+To run and test the smart contracts locally, you can deploy them to a local network with Clarinet.
 
 - Install [Clarinet](https://github.com/hirosystems/clarinet).
+
+### Test Contracts with Unit Tests
+
+```sh
+## Move into /contracts folder
+$ cd contracts
+
+## Execute the unit tests in a local network
+$ clarinet test
+```
+
+### Test Contracts with Front-End
+
 - Install and run [Docker](https://www.docker.com/).
 - Spwan a local Devnet and deploy the contracts:
 
@@ -124,10 +135,7 @@ $ cd contracts
 $ clarinet integrate
 ```
 
-### Start Frontend
-
-The frontend was built using [React](https://reactjs.org/) and [Chakra](https://chakra-ui.com/).
-
+Next, start the front-end. The frontend was built using [React](https://reactjs.org/) and [Chakra](https://chakra-ui.com/).
 
 ```sh
 ## Move into /frontend folder
@@ -142,9 +150,7 @@ $ npm run dev
 
 Access the frontend on the indicated localhost, most likely http://localhost:3000.
 
-### Connect Wallet
-
-You need a blockchain wallet to interact with the dApp and the smart contracts. The most popular choice for Stacks is for now the [Hiro Wallet](https://wallet.hiro.so/).
+Finally, connect a wallet to interact with the deployed contracts on Devnet. For that you need a blockchain wallet to interact with the dApp and the smart contracts. The most popular choice for Stacks is for now the [Hiro Wallet](https://wallet.hiro.so/).
 
 - Install Hiro for the browser of your choice.
 - Set up a wallet with one of the default addresses listed in the [Devnet.toml](/contracts/settings/Devnet.toml) file (so you have a funded address to play with).
