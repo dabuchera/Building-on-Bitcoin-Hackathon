@@ -1,6 +1,6 @@
 # StacksShare
 
-This prototype is the submission for the [Building on Bitcoin Hackathon](https://building-on-btc-hack.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open) by [dabuchera](https://github.com/dabuchera) and [hujens](https://github.com/hujens). It is part of our ongoing research with some additions (see also [here](https://github.com/dabuchera/web3-access)).
+This prototype was the submission for the [Building on Bitcoin Hackathon](https://building-on-btc-hack.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open) by [dabuchera](https://github.com/dabuchera) and [hujens](https://github.com/hujens). It was part of our ongoing research efforts (see also [here](https://github.com/dabuchera/web3-access)). The contribution took [2nd winner place](https://building-on-btc-hack.devpost.com/project-gallery).
 
 The prototype demonstrates how to use role-based and token-based smart contract access control for files and text snippets. This is exciting because access-logic to data can be decentralized with the dApp and Smart Contracts, instead of relying on access logic managed by a central server. The data is stored off-chain using a data storage protocol called [Gaia](https://github.com/stacks-network/gaia).
 
